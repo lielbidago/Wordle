@@ -1,5 +1,5 @@
 
-import {Key} from "./key";
+import Key from "./key";
 
 
 export function Keyboard(){

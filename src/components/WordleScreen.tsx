@@ -9,7 +9,6 @@ export function WordleScreen(){
     const {currentBoard} = useContext(WordleContext);
     
     return (<div className="game">
-    <header><h1>my wordle game</h1></header>
     <div className="screen">
         {[0,1,2,3,4].map((lineIndex)=> <Word wordLine={currentBoard[lineIndex]} letterPointer={{x:0,y:lineIndex}}/>)}
     </div>

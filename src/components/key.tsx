@@ -1,7 +1,7 @@
 import { WordleContext } from "../context/WordleContext";
 import { useContext } from "react";
 
-export function Key(props){
+export default function Key(props){
 
     const {addLetterToBoard, moveCurrLetterPointer} = useContext(WordleContext);
 
