@@ -4,6 +4,7 @@ import { useContext } from "react";
 export function LetterTile({letter, letterPointer}){
     
     const {currentBoard, setCurrentBoard, currLetterPointer, setCurrLetterPointer} = useContext(WordleContext);
+    
     const Tilekey = letterPointer.x.toString() + letterPointer.y.toString();
     
     if (letterPointer.y === currLetterPointer.y && letterPointer.x === currLetterPointer.x){
