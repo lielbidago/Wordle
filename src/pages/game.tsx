@@ -5,6 +5,7 @@ import {WordleScreen} from "../components/WordleScreen";
 import { Keyboard } from "../components/keyboard";
 import {useWordle} from "../hooks/wordleHooks";
 import {HelpModal} from "../components/WordleModal";
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 export function GamePage(){
@@ -26,9 +27,9 @@ export function GamePage(){
         <WordleContext.Provider value = {WordleAPI}>
             <div className="game" onKeyDown={useKeyboardEnter}>
                 <header>
-                    <h1>my wordle game</h1>
+                    <h1>Wordle<h6>By Liel</h6></h1>
                     <div className="help-section">
-                        <button onClick={useHelpClick}>help</button>
+                        <button onClick={useHelpClick} type="button" className="btn btn-info">help</button>
                     </div>
                 </header>
                 <WordleScreen/>

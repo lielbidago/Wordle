@@ -1,5 +1,6 @@
 import { WordleContext } from "../context/WordleContext";
 import { useContext } from "react";
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Key(props){
 
@@ -11,7 +12,7 @@ export default function Key(props){
     }
     
     return (
-        <button className="key" 
+        <button type="button" className="key btn btn-outline-dark" 
         key={'k'+ props.keyValue}
         onClick={useLetterEnter}>{props.keyValue}</button>
     );

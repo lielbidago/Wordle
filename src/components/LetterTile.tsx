@@ -1,6 +1,8 @@
 import { WordleContext } from "../context/WordleContext";
 import { useContext } from "react";
 
+
+
 export function LetterTile({letter, letterPointer}){
     
     const { currLetterPointer,addLetterToBoard,moveCurrLetterPointer} = useContext(WordleContext);
@@ -18,11 +20,11 @@ export function LetterTile({letter, letterPointer}){
     const isCurrentPointer:boolean = letterPointer.y === currLetterPointer.y && letterPointer.x === currLetterPointer.x;
 
     if(isCurrentPointer)
-    {return(<input readOnly className="tile"
+    {return(<input className="tile text-bg-light" readOnly 
          value={letter}
           key={Tilekey}
           autoFocus={isCurrentPointer}
-          style={{border:"solid black 2px"}}
+          style={{border:"solid #0dcaf0 2px"}}
           ></input>);
     }else{
         return(<input readOnly className="tile"
