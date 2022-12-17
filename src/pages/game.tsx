@@ -10,21 +10,32 @@ import {HelpModal} from "../components/WordleModal";
 export function GamePage(){
 
     const WordleAPI = useWordle();
-    const {modalShowState, setmodalShowState, useModalHelp} = WordleAPI;
+    const {modalShowState, setmodalShowState, useModalHelp, addLetterToBoard, moveCurrLetterPointer,} = WordleAPI;
 
     const useHelpClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalHelp(true);
     }
 
+    const useKeyboardEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if ("qwertyuioplkjhgfdsazxcvbnm".includes(event.key)){
+            addLetterToBoard((event.key).toUpperCase());
+            moveCurrLetterPointer();
+        }
+    }
     return (
         <WordleContext.Provider value = {WordleAPI}>
-            <header>
-                <h1>my wordle game</h1>
-                <span onClick={useHelpClick}>help</span>
-            </header>
-            <WordleScreen/>
-            <Keyboard/>
-            {modalShowState && <HelpModal/>}
+            <div className="game" onKeyDown={useKeyboardEnter}>
+                <header>
+                    <h1>my wordle game</h1>
+                    <div className="help-section">
+                        <button onClick={useHelpClick}>help</button>
+                    </div>
+                </header>
+                <WordleScreen/>
+                <Keyboard/>
+                {modalShowState && <HelpModal/>}
+            </div>
+            
         </WordleContext.Provider>
     );
 

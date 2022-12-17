@@ -1,23 +1,22 @@
 
 import Key from "./key";
-
+import { useContext } from "react";
+import { WordleContext } from "../context/WordleContext";
 
 export function Keyboard(){
 
-    const keyboard = [['Q','W','E','R','T','Y','U','I','O','P'],
-                        ['A','S','D','F','G','H','J','K','L'],
-                            ['Z','X','C','V',' ','B','N','M']];
+    const {keyboardLetters} = useContext(WordleContext);
     
-    return (<div className="keyboard">
+    return (<div className="keyboard" >
 
         <div className="row1">
-        {keyboard[0].map(letter => <Key keyValue={letter}/>)}
+        {keyboardLetters[0].map(letter => <Key keyValue={letter}/>)}
         </div>
         <div className="row2">
-        {keyboard[1].map(letter => <Key keyValue={letter}/>)}
+        {keyboardLetters[1].map(letter => <Key keyValue={letter}/>)}
         </div>
         <div className="row3">
-        {keyboard[2].map(letter => <Key keyValue={letter}/>)}
+        {keyboardLetters[2].map(letter => <Key keyValue={letter}/>)}
         </div>
 
     </div>);

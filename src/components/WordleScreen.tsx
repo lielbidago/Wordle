@@ -8,12 +8,12 @@ export function WordleScreen(){
     
     const {currentBoard} = useContext(WordleContext);
     
-    return (<div className="game">
+    return (
     <div className="screen">
         {[0,1,2,3,4].map((lineIndex)=> <Word wordLine={currentBoard[lineIndex]} letterPointer={{x:0,y:lineIndex}}/>)}
     </div>
     
-</div>);
+);
 }
 
 interface wordProps { wordLine:string[], letterPointer:{x:number, y: number }};
