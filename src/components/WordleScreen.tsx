@@ -20,8 +20,6 @@ interface wordProps { wordLine:string[], letterPointer:{x:number, y: number }};
 
 function Word({wordLine, letterPointer}: wordProps){
 
-    // const {wordLine, letterPointer} = Props; 
-
     return (
         <div className='word'>
             {/* {wordLine.map((letter:string)=>LetterTile(letter))} */}

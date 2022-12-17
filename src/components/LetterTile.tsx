@@ -14,18 +14,27 @@ export function LetterTile({letter, letterPointer}){
     // }
     
     const Tilekey = letterPointer.x.toString() + letterPointer.y.toString();
+
+    const isCurrentPointer:boolean = letterPointer.y === currLetterPointer.y && letterPointer.x === currLetterPointer.x;
+
+    if(isCurrentPointer)
+    {return(<input readOnly className="tile"
+         value={letter}
+          key={Tilekey}
+          autoFocus={isCurrentPointer}
+          style={{border:"solid black 2px"}}
+          ></input>);
+    }else{
+        return(<input readOnly className="tile"
+        autoFocus={isCurrentPointer}
+         value={letter}
+          key={Tilekey}
+          ></input>);
+
+    }
+        
     
-    if (letterPointer.y === currLetterPointer.y && letterPointer.x === currLetterPointer.x){
-         return (<input readOnly
-             className="tile"
-              value={letter}
-               key={Tilekey}
-               autoFocus
-                style={{border:"solid 2px black"}}
-                ></input>);
-                // onKeyDown={useKeyboardEnter}
-    }
-    else{
-        return(<input readOnly className="tile" value={letter} key={Tilekey}></input>);
-    }
+
+          //style={isCurrentPointer ? {border:"solid pink 2px;"}: {border:"solid black 1px;"}}
+    
 };
