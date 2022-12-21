@@ -4,11 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Key(props){
 
-    const {addLetterToBoard, moveCurrLetterPointer} = useContext(WordleContext);
+    const {addLetterToBoard, moveCurrLetterPointer, currLetterPointer} = useContext(WordleContext);
 
     const useLetterEnter = (event: React.MouseEvent<HTMLElement>) =>{
         addLetterToBoard(props.keyValue);
         moveCurrLetterPointer();
+        currLetterPointer.pRef.current.focus();
     }
     
     return (
@@ -16,4 +17,5 @@ export default function Key(props){
         key={'k'+ props.keyValue}
         onClick={useLetterEnter}>{props.keyValue}</button>
     );
+
 }

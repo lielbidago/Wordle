@@ -1,5 +1,5 @@
 import { WordleContext } from "../context/WordleContext";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 
 
 
@@ -7,36 +7,45 @@ export function LetterTile({letter, letterPointer}){
     
     const { currLetterPointer,addLetterToBoard,moveCurrLetterPointer} = useContext(WordleContext);
     
-    // const useKeyboardEnter = (event: React.KeyboardEvent) => {
-    //     if ("qwertyuioplkjhgfdsazxcvbnm".includes(event.key)){
-    //         addLetterToBoard(event.key);
-    //         moveCurrLetterPointer();
-    //     }
-
-    // }
-    
     const Tilekey = letterPointer.x.toString() + letterPointer.y.toString();
+    const isCurrentPointer = letterPointer.x===currLetterPointer.x && letterPointer.y===currLetterPointer.y;
 
-    const isCurrentPointer:boolean = letterPointer.y === currLetterPointer.y && letterPointer.x === currLetterPointer.x;
+    const Ref = useRef(null);
+    let focusRef = null;
 
-    if(isCurrentPointer)
-    {return(<input className="tile text-bg-light" readOnly 
-         value={letter}
-          key={Tilekey}
-          autoFocus={isCurrentPointer}
-          style={{border:"solid #0dcaf0 2px"}}
-          ></input>);
-    }else{
-        return(<input readOnly className="tile"
-        autoFocus={isCurrentPointer}
-         value={letter}
-          key={Tilekey}
-          ></input>);
+      if(isCurrentPointer){
+            focusRef = currLetterPointer.pRef;
+      }else{
+            focusRef = Ref;
+      }
 
-    }
-        
+      if(isCurrentPointer && letterPointer.x === 0 && letterPointer.y===0){
+            return <input className="tile text-bg-light" readOnly 
+            value={letter}
+            key={Tilekey}
+            ref = {focusRef}
+            autoFocus
+            ></input>;
+      
+      }
+      
+      return  <input className="tile text-bg-light" readOnly 
+      value={letter}
+      key={Tilekey}
+      ref = {focusRef}
+      ></input>;
+
+      // if(isCurrentPointer){
+      //       return focusRef.current.focus();
+      // }else{
+      //       return focusRef.current;
+      // }
+      // }else{
+      //       return <input className="tile text-bg-light" readOnly 
+      // value={letter}
+      // key={Tilekey}
+      // ></input>;
+      // }
     
-
-          //style={isCurrentPointer ? {border:"solid pink 2px;"}: {border:"solid black 1px;"}}
     
 };
