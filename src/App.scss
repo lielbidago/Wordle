@@ -1,0 +1,163 @@
+
+.game{
+  font-family: Georgia, serif;
+  text-align: center;
+      // background-color: white;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,0.6255544454109769) 0%,rgba(253,187,45,0.6451622885482318) 100%);
+  height: 100vh;
+}
+
+.welcomePage{
+
+  font-family: Georgia, serif;
+  text-align: center;
+
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,0.6255544454109769) 0%,
+  rgba(253,187,45,0.6451622885482318) 100%);
+
+  width: 100vw;
+  height: 100vh;
+  padding:6%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+      .welcome-main{
+        // width: 50%;
+        // height: 60%;
+        padding:5%;
+
+        background-color: white;
+        border: solid black 1px;
+        text-align: center;
+        border-radius: 10px;
+
+        z-index: 1;
+        box-shadow: 4px 4px 4px 4px #0dcaf079,0 2px 0 0 rgba(31, 172, 238, 0.19);
+      }
+
+      .start{
+        color:white;
+      }
+}
+
+
+.tile{
+  min-width: 45px;
+  min-height: 45px;
+
+  width:3.5vw;
+  height:7vh;
+
+  font-size: 20px;
+  text-align: center;
+  margin: 2px;
+  border:solid #0dcaf0 1.5px;
+  border-radius: 5%;
+
+
+
+}
+
+// input.tile:focus{
+//   border:solid #0dcaf0 3px;
+  
+  
+// }
+
+
+
+header{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 65px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 0 5px 0 rgba(0,0,0,0.19);
+}
+
+header span{
+  text-align: left;
+  margin-left: 5%;
+  margin-top:2%;
+  font-family: Georgia, serif;
+}
+header h1{
+  font-weight: bolder;
+  display: inline;
+  
+}
+p{
+    margin-left: 4px;
+    display: inline;
+    font-size: medium;
+}
+
+.help-section{
+  text-align: right;
+}
+
+header .help-section button{
+  margin: 2% 3% 4% 0;
+  padding:1%;
+  background-color: rgba(255, 255, 255, 0.954);
+  border: black solid 1px;
+
+}
+
+.screen{
+  margin: 2%;
+}
+
+.keyboard button{
+  padding:1%;
+  margin: 0.5%;
+}
+
+// .blur-background{
+//   filter: blur(8px);
+// }
+
+.modal-backdrop{
+  // filter: blur(8px);
+  background: linear-gradient(0deg, rgb(68, 191, 193) 0%
+  ,rgb(255, 211, 114) 100%);
+  
+}
+
+.Modal{
+  position:fixed;
+  top:20%;
+  left:25%;
+
+  width: 50%;
+  height: 60%;
+
+  background-color: white;
+  border: solid black 1px;
+  text-align: center;
+  border-radius: 10px;
+
+  z-index: 1;
+  box-shadow: 4px 4px 4px 4px #0dcaf079,0 2px 0 0 rgba(31, 172, 238, 0.19);
+
+  button{
+    position:absolute;
+    top: 3%;
+    right:3%;
+
+  }
+
+  .Modal-header{
+    margin: 5% 0 5% 0;
+  }
+
+  
+}
+
+.model-example-style{
+  color: white;
+  padding: 2px;
+  border-radius: 10%;
+}
