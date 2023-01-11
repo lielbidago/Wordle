@@ -1,5 +1,5 @@
 import {WordleContext} from "../context/WordleContext";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 
 
 export function useWordle(){
@@ -23,7 +23,23 @@ export function useWordle(){
     y: 0,
     pRef: pRef});
     const [modalShowState, setmodalShowState] = useState(false);
+    const [loginShowState, setloginShowState] = useState(false);
+    const userName = localStorage.getItem('UserName');
+    const user = userName? userName:'guest';
+    const [CurrentUser, setCurrentUser] = useState(user);
+    // const nameRef = useRef(null);
 
+    // useEffect(()=>{
+    //     // const name = nameRef.current.value;
+    //     setCurrentUser(nameRef.current.value);
+    //     localStorage.setItem('UserName', nameRef.current.value);
+    // }, [loginShowState])
+
+    // useEffect(()=>{
+    //     setCurrentUser('guest');
+    // },[]);
+    
+    
     function addLetterToBoard(letterKey){
         
         // const {currentBoard, setCurrentBoard,currLetterPointer, setCurrLetterPointer} = useContext(WordleContext);
@@ -76,18 +92,45 @@ export function useWordle(){
 
     }
 
+    function useModalLogin(show:boolean){
+
+        setloginShowState(show);
+
+    }
+
+    function useCurrentUser(name:string){
+        console.log('>>> entered useCurrentUser');
+        console.log('>>> name = '+name);
+        console.log('>>> entered CurrentUser = ' + CurrentUser);
+        setCurrentUser(name); 
+        console.log(`>>> set ${CurrentUser} as current user`);
+        localStorage.setItem('UserName', name);
+    }
+
+    
+
 
     return ({
         addLetterToBoard,
-        moveCurrLetterPointer,
         currentBoard,
         setCurrentBoard,
+
+        moveCurrLetterPointer,
         currLetterPointer,
         setCurrLetterPointer,
+        
         modalShowState,
         setmodalShowState,
         useModalHelp,
+
         keyboardLetters, 
+        
+        useModalLogin,
+        loginShowState,
+        useCurrentUser,
+        CurrentUser,
+
+        
     }
     );
 

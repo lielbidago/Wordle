@@ -10,13 +10,13 @@ export function Keyboard(){
     return (<div className="keyboard" >
 
         <div className="row1">
-        {keyboardLetters[0].map(letter => <Key keyValue={letter}/>)}
+        {keyboardLetters[0].map(letter => <Key keyValue={letter} key={'k-'+letter}/>)}
         </div>
         <div className="row2">
-        {keyboardLetters[1].map(letter => <Key keyValue={letter}/>)}
+        {keyboardLetters[1].map(letter => <Key keyValue={letter} key={'k-'+letter}/>)}
         </div>
         <div className="row3">
-        {keyboardLetters[2].map(letter => <Key keyValue={letter}/>)}
+        {keyboardLetters[2].map(letter => <Key keyValue={letter} key={'k-'+letter}/>)}
         </div>
 
     </div>);

@@ -2,8 +2,7 @@ import { WordleContext } from "../context/WordleContext";
 import { useContext, useRef } from "react";
 
 
-
-export function LetterTile({letter, letterPointer}){
+export function LetterTile({letter, letterPointer, key}){
     
     const { currLetterPointer,addLetterToBoard,moveCurrLetterPointer} = useContext(WordleContext);
     
@@ -22,7 +21,7 @@ export function LetterTile({letter, letterPointer}){
       if(isCurrentPointer && letterPointer.x === 0 && letterPointer.y===0){
             return <input className="tile text-bg-light" readOnly 
             value={letter}
-            key={Tilekey}
+            key={key}
             ref = {focusRef}
             autoFocus
             ></input>;
@@ -31,7 +30,7 @@ export function LetterTile({letter, letterPointer}){
       
       return  <input className="tile text-bg-light" readOnly 
       value={letter}
-      key={Tilekey}
+      key={key}
       ref = {focusRef}
       ></input>;
 

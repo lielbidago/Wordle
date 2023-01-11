@@ -23,7 +23,7 @@ function Word({wordLine, letterPointer}: wordProps){
     return (
         <div className='word'>
             {/* {wordLine.map((letter:string)=>LetterTile(letter))} */}
-            {wordLine.map((letter:string, index)=><LetterTile letter={letter} letterPointer={{x:index, y:letterPointer.y}}/>)}
+            {wordLine.map((letter:string, index)=><LetterTile letter={letter} key={'Lt-'+index} letterPointer={{x:index, y:letterPointer.y}}/>)}
         </div>
     );
 }

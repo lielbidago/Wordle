@@ -19,6 +19,14 @@ export function HelpModal(){
         useModalHelp(false);
     }
 
+    // const useExitPress = (event:React.KeyboardEvent<HTMLDivElement>) =>{
+    //     console.log(event.key);
+    //     // if(event.key === 'ESC'){
+    //     //     useModalHelp(false);
+    //     // }
+    // }
+
+
     return(
         <div className="modal-backdrop">
         <div className="Modal">
