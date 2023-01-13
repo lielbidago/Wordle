@@ -18,7 +18,6 @@ export default function Key(props:props){
     
     return (
         <button type="button" className="key btn btn-outline-dark" 
-        key={props.key}
         onClick={useLetterEnter}>{props.keyValue}</button>
     );
 

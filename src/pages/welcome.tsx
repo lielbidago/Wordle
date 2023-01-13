@@ -5,8 +5,8 @@ import { WordleContext } from "../context/WordleContext";
 export function WelcomePage(){
     
     // const {CurrentUser} = useContext(WordleContext);
-
-    let user = localStorage.getItem('UserName') ? localStorage.getItem('UserName') : 'guest';
+    const UserName = localStorage.getItem('UserName');
+    let user = UserName ? UserName : 'guest';
     
     return (
         <div className="welcomePage">

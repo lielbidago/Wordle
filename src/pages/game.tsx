@@ -14,11 +14,15 @@ export function GamePage(){
     const WordleAPI = useWordle();
     const {modalShowState, useModalHelp, addLetterToBoard,
          moveCurrLetterPointer, currLetterPointer, loginShowState, useModalLogin,
-          CurrentUser, useCurrentUser} = WordleAPI;
+          CurrentUser, useCurrentUser, setmodalShowState} = WordleAPI;
 
     const useHelpClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalHelp(true);
     }
+
+    useEffect(()=>{
+        currLetterPointer.pRef.current.focus();
+    })
 
     const useLoginClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalLogin(true);
@@ -27,10 +31,14 @@ export function GamePage(){
     const useKeyboardEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if ("qwertyuioplkjhgfdsazxcvbnm ".includes(event.key)){
             
+            // console.log(`current pointer: ${currLetterPointer.x}:${currLetterPointer.y}`);
             addLetterToBoard((event.key).toUpperCase());
             moveCurrLetterPointer();
-            currLetterPointer.pRef.current.focus();
-        }else{
+            
+        }else if(event.key='esc'){
+            setmodalShowState(false);
+        }
+        else{
             (()=>alert('not a letter!'))();
         }
 
@@ -38,13 +46,8 @@ export function GamePage(){
 
     const gameRef = useRef(null);
 
-    // if(loginShowState && CurrentUser==='guest'){
-    //     useModalLogin(false);
-    //     
-    // }
-
     const useLogoutClick = () => {
-        // localStorage.setItem('UserName','guest');
+        
         useCurrentUser('guest');
         
     }

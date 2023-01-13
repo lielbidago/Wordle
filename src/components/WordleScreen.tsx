@@ -10,7 +10,7 @@ export function WordleScreen(){
     
     return (
     <div className="screen">
-        {[0,1,2,3,4].map((lineIndex)=> <Word wordLine={currentBoard[lineIndex]} letterPointer={{x:0,y:lineIndex}}/>)}
+        {[0,1,2,3,4].map((lineIndex)=> <Word key={lineIndex} wordLine={currentBoard[lineIndex]} letterPointer={{x:0,y:lineIndex}}/>)}
     </div>
     
 );
