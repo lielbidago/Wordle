@@ -1,6 +1,5 @@
-import {WordleContext} from "../context/WordleContext";
-import { useState, useContext, useRef, useEffect } from "react";
-import {checkWord, isWord, getWord} from '../gameLogic/gameLogicFunctions'
+import { useState,useRef } from "react";
+import { isWord, getWord,checkWord} from '../gameLogic/gameLogicFunctions'
 
 
 export function useWordle(){
@@ -32,8 +31,11 @@ export function useWordle(){
     const user = userName? userName:'guest';
     const [CurrentUser, setCurrentUser] = useState(user);
 
-    const [CurrentLettersColor, setCurrentLettersColor] = useState(wordsBoard);
-    const currGameWord = getWord();
+    const [currentColorBoard, setCurrentColorBoard] = useState(wordsBoard);
+    
+
+    const currGameWord = getWord().toUpperCase();
+    
     
     function addLetterToBoard(letterKey:string){
                 
@@ -64,20 +66,18 @@ export function useWordle(){
             // newPointer.y = null;
 
         }else if (currLetterPointer.x===4){
-
+            
             newPointer.x = 0;
             newPointer.y = currLetterPointer.y+1;
-            console.log(`#${newPointer.y} word done!`);
-            //func => change checkword state ###
-
+            
         }else if(currLetterPointer.x<4){
-
+            
             newPointer.x = currLetterPointer.x+1;
             newPointer.y = currLetterPointer.y;
         }
 
         setCurrLetterPointer(newPointer);
-        // console.log(`post pointer: ${newPointer.x}:${newPointer.y}`);
+
     }
 
     function useModalHelp(show){
@@ -101,17 +101,22 @@ export function useWordle(){
         localStorage.setItem('UserName', name);
     }
 
-    function boardUpdate(){
-        
-        
-        
-        // if(isWord(word, currGameWord)){
-        //     alert('success!!!');
-        // }else{
-        //     const wordStatus = checkWord(word, currGameWord);
 
+    function colorBoardUpdate(currentColorBoard: string[][], curPointer, currentBoard:string[][]){
+        
+        const currentWord = currentBoard[curPointer.y-1].join('');
+        const wordStatus = checkWord(currGameWord,currentWord);
+        const newBoard = currentColorBoard.map((line, index)=>
+        index===curPointer.y-1? wordStatus:line);
+            
+        setCurrentColorBoard(newBoard);
 
-        // }
+        if(isWord(currentWord, currGameWord)){
+            alert('success!!!');
+            //success modal?
+        }else{
+            alert('fail:(');
+        }
     }
 
     
@@ -136,6 +141,9 @@ export function useWordle(){
         loginShowState,
         useCurrentUser,
         CurrentUser,
+
+        currentColorBoard,
+        colorBoardUpdate,
 
         
     }

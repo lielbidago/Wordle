@@ -3,10 +3,10 @@ import {WordleScreen} from "../components/WordleScreen";
 import { Keyboard } from "../components/keyboard";
 import {useWordle} from "../hooks/wordleHooks";
 import {HelpModal} from "../components/WordleModal";
+import { LoginModal } from "../components/LoginModal";
 
 import { useEffect, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import { LoginModal } from "../components/LoginModal";
 
 
 export function GamePage(){
@@ -14,7 +14,7 @@ export function GamePage(){
     const WordleAPI = useWordle();
     const {modalShowState, useModalHelp, addLetterToBoard,
          moveCurrLetterPointer, currLetterPointer, loginShowState, useModalLogin,
-          CurrentUser, useCurrentUser, setmodalShowState} = WordleAPI;
+          CurrentUser, useCurrentUser, setmodalShowState,currentColorBoard,currentBoard,colorBoardUpdate } = WordleAPI;
 
     const useHelpClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalHelp(true);
@@ -22,7 +22,39 @@ export function GamePage(){
 
     useEffect(()=>{
         currLetterPointer.pRef.current.focus();
-    })
+    }, [currLetterPointer.pRef.current]);
+
+    useEffect(()=>{
+        if(currLetterPointer.x ===0 && currLetterPointer.y>0 ){
+            colorBoardUpdate(currentColorBoard,currLetterPointer,currentBoard);
+        }
+        
+    }, [currLetterPointer]);
+
+    useEffect(()=>{
+        currentColorBoard.forEach((line:string[], lineIndex)=>{
+            line.forEach((tile:string, tileIndex)=>{
+
+                const tilePlace = 't-'+(tileIndex).toString()+":"+(lineIndex).toString();
+                const tileElement = document.getElementById(tilePlace);
+                const colors = ['rgba(218, 218, 218, 0.76)',
+                                'rgba(18, 226, 198, 0.76)',
+                                'rgba(255, 224, 131, 0.76)']
+
+                tileElement.style.backgroundColor = tile.slice(2);
+        
+                if(colors.includes(tileElement.style.backgroundColor))
+                { tileElement.style.color = 'white'};
+                
+                if(tile !== '' ){
+                    
+                    const keyElement = document.getElementById('k-'+tile.slice(0,1));
+                    keyElement.style.backgroundColor = tile.slice(2);
+                }
+
+            })
+        })
+    }, [currentColorBoard])
 
     const useLoginClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalLogin(true);
@@ -30,8 +62,6 @@ export function GamePage(){
 
     const useKeyboardEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if ("qwertyuioplkjhgfdsazxcvbnm ".includes(event.key)){
-            
-            // console.log(`current pointer: ${currLetterPointer.x}:${currLetterPointer.y}`);
             addLetterToBoard((event.key).toUpperCase());
             moveCurrLetterPointer();
             
