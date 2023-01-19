@@ -1,0 +1,35 @@
+.welcomePage{
+
+    font-family: Georgia, serif;
+    text-align: center;
+  
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,0.6255544454109769) 0%,
+    rgba(253,187,45,0.6451622885482318) 100%);
+  
+    width: 100vw;
+    height: 100vh;
+    padding:6%;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+        .welcome-main{
+          // width: 50%;
+          // height: 60%;
+          padding:5%;
+  
+          background-color: white;
+          border: solid black 1px;
+          text-align: center;
+          border-radius: 10px;
+  
+          z-index: 1;
+          box-shadow: 4px 4px 4px 4px #0dcaf079,0 2px 0 0 rgba(31, 172, 238, 0.19);
+        }
+  
+        .start{
+          color:white;
+        }
+  }
