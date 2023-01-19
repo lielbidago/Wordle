@@ -62,8 +62,6 @@ export function useWordle(){
         if(currLetterPointer.x===4 && currLetterPointer.y===4){
 
             (()=>(alert('congrats!! you won!!')))();
-            // newPointer.x = null;
-            // newPointer.y = null;
 
         }else if (currLetterPointer.x===4){
             
@@ -113,7 +111,9 @@ export function useWordle(){
 
         if(isWord(currentWord, currGameWord)){
             alert('success!!!');
-            //success modal?
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
         }else{
             alert('fail:(');
         }

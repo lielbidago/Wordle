@@ -8,61 +8,6 @@
   height: 100vh;
 }
 
-.welcomePage{
-
-  font-family: Georgia, serif;
-  text-align: center;
-
-  background: rgb(34,193,195);
-  background: linear-gradient(0deg, rgba(34,193,195,0.6255544454109769) 0%,
-  rgba(253,187,45,0.6451622885482318) 100%);
-
-  width: 100vw;
-  height: 100vh;
-  padding:6%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-      .welcome-main{
-        // width: 50%;
-        // height: 60%;
-        padding:5%;
-
-        background-color: white;
-        border: solid black 1px;
-        text-align: center;
-        border-radius: 10px;
-
-        z-index: 1;
-        box-shadow: 4px 4px 4px 4px #0dcaf079,0 2px 0 0 rgba(31, 172, 238, 0.19);
-      }
-
-      .start{
-        color:white;
-      }
-}
-
-
-.tile{
-  min-width: 45px;
-  min-height: 45px;
-
-  width:3.5vw;
-  height:7vh;
-
-  font-size: 20px;
-  text-align: center;
-  margin: 2px;
-  // border:solid #0dcaf0 1.5px;
-  border:solid #ffffff 0px;
-  border-radius: 5%;
-
-}
-  
-
-
 header{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -96,65 +41,6 @@ header .header-section button{
   padding:1%;
   background-color: rgba(255, 255, 255, 0.954);
   border: rgb(2, 196, 203) solid 1px;
-
-}
-
-.screen{
-  margin: 2%;
-}
-
-.keyboard button{
-  padding:1%;
-  margin: 0.5%;
-}
-
-
-.modal-backdrop{
-  background: linear-gradient(0deg, rgb(68, 191, 193) 0%
-  ,rgb(255, 211, 114) 100%);
-  
-}
-
-.Modal{
-  position:fixed;
-  top:20%;
-  left:25%;
-
-  width: 50%;
-  height: 60%;
-
-  background-color: white;
-  border: solid black 1px;
-  text-align: center;
-  border-radius: 10px;
-
-  z-index: 1;
-  box-shadow: 4px 4px 4px 4px #0dcaf079,0 2px 0 0 rgba(31, 172, 238, 0.19);
-
-  .btn-close{
-    position:absolute;
-    top: 3%;
-    right:3%;
-
-  }
-
-  .submit{
-    position:absolute;
-    bottom: 25%;
-    right: 39%;
-  }
-
-  .Modal-header{
-    margin: 5% 0 5% 0;
-  }
-
-  
-}
-
-.model-example-style{
-  color: white;
-  padding: 2px;
-  border-radius: 10%;
 }
 
 .header-greeting{
@@ -164,8 +50,6 @@ header .header-section button{
   padding:1.5%;
   border-bottom: solid #ffffff 1px;
   margin-right: 10px;
-  margin-top: 3px;
-  // background:radial-gradient(circle, #74e8ffd6 0%, rgba(255, 209, 109, 0.881) 100%);
-  
+  margin-top: 3px;  
   
 }

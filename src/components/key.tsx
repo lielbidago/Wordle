@@ -1,6 +1,7 @@
 import { WordleContext } from "../context/WordleContext";
 import { useContext } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
+import './key.scss';
 
 interface props{
     keyValue:string;

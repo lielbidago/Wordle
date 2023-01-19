@@ -1,5 +1,6 @@
 import { WordleContext } from "../context/WordleContext";
 import { useContext, useRef } from "react";
+import './LetterTile.scss';
 
 
 // interface Tile{

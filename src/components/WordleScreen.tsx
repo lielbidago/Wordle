@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { WordleContext } from "../context/WordleContext";
 import {LetterTile} from "./LetterTile";
-
-
+import './WordleScreen.scss';
 
 export function WordleScreen(){
     

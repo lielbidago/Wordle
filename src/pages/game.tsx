@@ -50,6 +50,8 @@ export function GamePage(){
                     
                     const keyElement = document.getElementById('k-'+tile.slice(0,1));
                     keyElement.style.backgroundColor = tile.slice(2);
+                    keyElement.style.color = 'white';
+                    keyElement.style.border = 'solid white 1px';
                 }
 
             })
