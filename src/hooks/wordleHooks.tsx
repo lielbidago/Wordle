@@ -1,16 +1,30 @@
 import { useState,useRef } from "react";
 import { isWord, getWord,checkWord} from '../gameLogic/gameLogicFunctions'
 
+export interface wordleLetter{
+    char: string,
+    ref:React.RefObject<HTMLElement> | null,
+    color:'white'|'green'|'yellow'|'grey',
+    x:number,
+    y:number
+}
 
 export function useWordle(){
 
-    const wordsBoard =[  
-    ['','','','',''],
-    ['','','','',''],
-    ['','','','',''],
-    ['','','','',''],
-    ['','','','','']];
+    const wordleState:wordleLetter[][] =[  
+    [{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null}],
+    [{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null}],
+    [{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null}],
+    [{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null}],
+    [{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null},{char:'', ref:null,color:'white', x:null, y:null}],
+    ];
 
+    // const wordsBoard=[  
+    //     ['','','','',''],
+    //     ['','','','',''],
+    //     ['','','','',''],
+    //     ['','','','',''],
+    //     ['','','','','']];
 
     const keyboardLetters = [  ['Q','W','E','R','T','Y','U','I','O','P'],
                             ['A','S','D','F','G','H','J','K','L'],
@@ -18,7 +32,7 @@ export function useWordle(){
 
     const pointRef = useRef(null);
     
-    const [currentBoard, setCurrentBoard] = useState(wordsBoard);
+    const [currentBoard, setCurrentBoard] = useState(wordleState);
     const [currLetterPointer, setCurrLetterPointer] = useState({
     x: 0,
     y: 0,
@@ -31,7 +45,7 @@ export function useWordle(){
     const user = userName? userName:'guest';
     const [CurrentUser, setCurrentUser] = useState(user);
 
-    const [currentColorBoard, setCurrentColorBoard] = useState(wordsBoard);
+    // const [currentColorBoard, setCurrentColorBoard] = useState(wordsBoard);
     
 
     const currGameWord = getWord().toUpperCase();
@@ -46,7 +60,7 @@ export function useWordle(){
                 
                 rowWord.map((cell, cellInd)=>(
 
-                cellInd===currLetterPointer.x? letterKey : cell))
+                cellInd===currLetterPointer.x? {...cell, char:letterKey, x:cellInd, y:wordInd} : cell))
                 
             :currentBoard[wordInd]
         ));
@@ -91,23 +105,30 @@ export function useWordle(){
     }
 
     function useCurrentUser(name:string){
-        // console.log('>>> entered useCurrentUser');
-        // console.log('>>> name = '+name);
-        // console.log('>>> entered CurrentUser = ' + CurrentUser);
+
         setCurrentUser(name); 
-        // console.log(`>>> set ${CurrentUser} as current user`);
+
         localStorage.setItem('UserName', name);
     }
 
 
-    function colorBoardUpdate(currentColorBoard: string[][], curPointer, currentBoard:string[][]){
+    function BoardUpdate(curPointer, currentBoard:wordleLetter[][]){
         
-        const currentWord = currentBoard[curPointer.y-1].join('');
+        const PrevWordIndex = curPointer.y-1;
+        
+        const currentWord = currentBoard[PrevWordIndex]
+        .map((letterObj)=>letterObj.char).join('');
+
         const wordStatus = checkWord(currGameWord,currentWord);
-        const newBoard = currentColorBoard.map((line, index)=>
-        index===curPointer.y-1? wordStatus:line);
+        
+        const newBoard = currentBoard.map((line, index)=>
+        {if(index===PrevWordIndex){
+            return currentBoard[index].map((letterObj, index)=>({...letterObj, color:wordStatus[index]}))
+        }else{
+            return line;
+        }});
             
-        setCurrentColorBoard(newBoard);
+        setCurrentBoard(newBoard);
 
         if(isWord(currentWord, currGameWord)){
             alert('success!!!');
@@ -119,7 +140,16 @@ export function useWordle(){
         }
     }
 
-    
+    const useLetterEnter = (key:string) =>{
+        addLetterToBoard(key);
+        moveCurrLetterPointer();
+        currLetterPointer.pRef.current.focus();
+    }
+
+    const useLogin = (name:string) =>{
+        useCurrentUser(name);
+        useModalLogin(false);
+    }
 
 
     return ({
@@ -142,10 +172,11 @@ export function useWordle(){
         useCurrentUser,
         CurrentUser,
 
-        currentColorBoard,
+        // currentColorBoard,
         colorBoardUpdate,
 
-        
+        useLogin,
+        useLetterEnter
     }
     );
 

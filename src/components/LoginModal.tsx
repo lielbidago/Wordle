@@ -7,12 +7,12 @@ import './Modal.scss';
 export function LoginModal(){
     
     
-    const {useModalLogin, useCurrentUser} = useContext(WordleContext);
+    const {useModalLogin, useCurrentUser, useLogin} = useContext(WordleContext);
+    
     const nameRef = useRef(null);
 
-    const useLogin = (event: React.MouseEvent<HTMLElement>) =>{
-        useCurrentUser(nameRef.current.value);
-        useModalLogin(false);
+    const handleLogin = (event: React.MouseEvent<HTMLElement>) =>{
+        useLogin(nameRef.current.value);
     }
 
     const handleInputFocus = (event: React.SyntheticEvent) =>{

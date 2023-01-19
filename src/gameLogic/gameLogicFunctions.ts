@@ -11,18 +11,16 @@ export function isWord(word: string, wordEntered: string):boolean{
 export function checkWord(word: string, wordEntered: string):string[]{
     
     let wordColors = wordEntered.split("");
-    wordColors= wordColors.map((l)=>(l+':'+'rgb(218 218 218 / 76%)'));
+    const wordStatus = ['grey','grey','grey','grey','grey'];
     
-    wordColors.forEach((letterStatus:string, index:number)=>{
-            
-            const letter = letterStatus.slice(0,1);
+    wordColors.forEach((letter:string, index:number)=>{
 
             if(word.includes(letter)){
                 
                 if(word[index]===letter){
-                    wordColors[index] = letterStatus.slice(0,2)+'rgb(18 226 198 / 76%)';
+                    wordColors[index] = 'green';
                 }else{
-                    wordColors[index] = letterStatus.slice(0,2)+'rgb(255 224 131 / 76%)';
+                    wordColors[index] = 'yellow';
                 }
                 
             }

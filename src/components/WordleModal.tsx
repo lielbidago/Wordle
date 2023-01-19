@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './Modal.scss';
 
 
-
-
 export function HelpModal(){
     
     const {useModalHelp} = useContext(WordleContext);

@@ -9,17 +9,21 @@ interface props{
 }
 export default function Key(props:props){
 
-    const {addLetterToBoard, moveCurrLetterPointer, currLetterPointer} = useContext(WordleContext);
+    const {useLetterEnter} = useContext(WordleContext);
 
-    const useLetterEnter = (event: React.MouseEvent<HTMLElement>) =>{
-        addLetterToBoard(props.keyValue);
-        moveCurrLetterPointer();
-        currLetterPointer.pRef.current.focus();
+    // const useLetterEnter = (event: React.MouseEvent<HTMLElement>) =>{
+    //     addLetterToBoard(props.keyValue);
+    //     moveCurrLetterPointer();
+    //     currLetterPointer.pRef.current.focus();
+    // }
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) =>{
+        useLetterEnter(props.keyValue);
     }
     
     return (
         <button type="button" className="key btn btn-outline-dark" id={'k-'+props.keyValue}
-        onClick={useLetterEnter}>{props.keyValue}</button>
+        onClick={handleClick}>{props.keyValue}</button>
     );
 
 }

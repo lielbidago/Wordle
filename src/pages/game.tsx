@@ -8,17 +8,24 @@ import { LoginModal } from "../components/LoginModal";
 import { useEffect, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 
-
+// grey = 'rgb(218 218 218 / 76%)'
+//green = 'rgb(18 226 198 / 76%)'
+//yellow = 'rgb(255 224 131 / 76%)'
+//
 export function GamePage(){
 
     const WordleAPI = useWordle();
     const {modalShowState, useModalHelp, addLetterToBoard,
          moveCurrLetterPointer, currLetterPointer, loginShowState, useModalLogin,
-          CurrentUser, useCurrentUser, setmodalShowState,currentColorBoard,currentBoard,colorBoardUpdate } = WordleAPI;
+          CurrentUser, useCurrentUser, setmodalShowState,currentBoard,colorBoardUpdate, keyboardLetters } = WordleAPI;
 
     const useHelpClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalHelp(true);
     }
+
+    // const handleClick = (event: React.MouseEvent<HTMLElement>) =>{
+    //     useLetterEnter(props.keyValue);
+    // }
 
     useEffect(()=>{
         currLetterPointer.pRef.current.focus();
