@@ -11,21 +11,22 @@ export function isWord(word: string, wordEntered: string):boolean{
 export function checkWord(word: string, wordEntered: string):string[]{
     
     let wordColors = wordEntered.split("");
-    const wordStatus = ['grey','grey','grey','grey','grey'];
+    let wordStatus = ['grey','grey','grey','grey','grey'];
     
-    wordColors.forEach((letter:string, index:number)=>{
+    wordStatus=wordColors.map((letter:string, index:number)=>{
 
             if(word.includes(letter)){
                 
                 if(word[index]===letter){
-                    wordColors[index] = 'green';
+                    return 'green';
                 }else{
-                    wordColors[index] = 'yellow';
+                    return 'yellow';
                 }
                 
             }
+            return 'grey'
  
         })
     
-    return wordColors
+    return wordStatus
 }

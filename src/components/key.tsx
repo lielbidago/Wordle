@@ -2,14 +2,17 @@ import { WordleContext } from "../context/WordleContext";
 import { useContext } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import './key.scss';
+import { keyboardLetter } from "../hooks/wordleHooks";
 
 interface props{
-    keyValue:string;
+    letter:keyboardLetter;
     key:string;
+
 }
 export default function Key(props:props){
 
-    const {useLetterEnter} = useContext(WordleContext);
+    const {LetterEnter} = useContext(WordleContext);
+    const {letter} = props;
 
     // const useLetterEnter = (event: React.MouseEvent<HTMLElement>) =>{
     //     addLetterToBoard(props.keyValue);
@@ -18,12 +21,12 @@ export default function Key(props:props){
     // }
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) =>{
-        useLetterEnter(props.keyValue);
+        LetterEnter(letter.value);
     }
     
     return (
-        <button type="button" className="key btn btn-outline-dark" id={'k-'+props.keyValue}
-        onClick={handleClick}>{props.keyValue}</button>
+        <button type="button" className={"key btn btn-outline-dark "+letter.color} id={'k-'+letter.value}
+        onClick={handleClick}>{letter.value}</button>
     );
 
 }

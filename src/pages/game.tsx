@@ -17,7 +17,7 @@ export function GamePage(){
     const WordleAPI = useWordle();
     const {modalShowState, useModalHelp, addLetterToBoard,
          moveCurrLetterPointer, currLetterPointer, loginShowState, useModalLogin,
-          CurrentUser, useCurrentUser, setmodalShowState,currentBoard,colorBoardUpdate, keyboardLetters } = WordleAPI;
+          CurrentUser, useCurrentUser, setmodalShowState,currentBoard,BoardUpdate, currentKeyBoard } = WordleAPI;
 
     const useHelpClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalHelp(true);
@@ -33,37 +33,39 @@ export function GamePage(){
 
     useEffect(()=>{
         if(currLetterPointer.x ===0 && currLetterPointer.y>0 ){
-            colorBoardUpdate(currentColorBoard,currLetterPointer,currentBoard);
+            BoardUpdate();
         }
         
     }, [currLetterPointer]);
+    
 
-    useEffect(()=>{
-        currentColorBoard.forEach((line:string[], lineIndex)=>{
-            line.forEach((tile:string, tileIndex)=>{
 
-                const tilePlace = 't-'+(tileIndex).toString()+":"+(lineIndex).toString();
-                const tileElement = document.getElementById(tilePlace);
-                const colors = ['rgba(218, 218, 218, 0.76)',
-                                'rgba(18, 226, 198, 0.76)',
-                                'rgba(255, 224, 131, 0.76)']
+    // useEffect(()=>{
+    //     currentColorBoard.forEach((line:string[], lineIndex)=>{
+    //         line.forEach((tile:string, tileIndex)=>{
 
-                tileElement.style.backgroundColor = tile.slice(2);
+    //             const tilePlace = 't-'+(tileIndex).toString()+":"+(lineIndex).toString();
+    //             const tileElement = document.getElementById(tilePlace);
+    //             const colors = ['rgba(218, 218, 218, 0.76)',
+    //                             'rgba(18, 226, 198, 0.76)',
+    //                             'rgba(255, 224, 131, 0.76)']
+
+    //             tileElement.style.backgroundColor = tile.slice(2);
         
-                if(colors.includes(tileElement.style.backgroundColor))
-                { tileElement.style.color = 'white'};
+    //             if(colors.includes(tileElement.style.backgroundColor))
+    //             { tileElement.style.color = 'white'};
                 
-                if(tile !== '' ){
+    //             if(tile !== '' ){
                     
-                    const keyElement = document.getElementById('k-'+tile.slice(0,1));
-                    keyElement.style.backgroundColor = tile.slice(2);
-                    keyElement.style.color = 'white';
-                    keyElement.style.border = 'solid white 1px';
-                }
+    //                 const keyElement = document.getElementById('k-'+tile.slice(0,1));
+    //                 keyElement.style.backgroundColor = tile.slice(2);
+    //                 keyElement.style.color = 'white';
+    //                 keyElement.style.border = 'solid white 1px';
+    //             }
 
-            })
-        })
-    }, [currentColorBoard])
+    //         })
+    //     })
+    // }, [currentColorBoard])
 
     const useLoginClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalLogin(true);
