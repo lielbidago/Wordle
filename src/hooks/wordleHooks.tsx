@@ -23,14 +23,6 @@ export function useWordle(){
     [{char:'',color:'white', x:0, y:4},{char:'',color:'white', x:1, y:4},{char:'',color:'white', x:2, y:4},{char:'',color:'white', x:3, y:4},{char:'',color:'white', x:4, y:4}],
     ];
 
-
-    // const wordsBoard=[  
-    //     ['','','','',''],
-    //     ['','','','',''],
-    //     ['','','','',''],
-    //     ['','','','',''],
-    //     ['','','','','']];
-
     const keyboardLetters:keyboardLetter[][] = [  [{value:'Q', color:''},{value:'W', color:''},{value:'E', color:''},{value:'R', color:''},{value:'T', color:''},{value:'Y', color:''},{value:'U', color:''},{value:'I', color:''},{value:'O', color:''},{value:'P', color:''}],
                             [{value:'A', color:''},{value:'S', color:''},{value:'D', color:''},{value:'F', color:''},{value:'G', color:''},{value:'H', color:''},{value:'J', color:''},{value:'K', color:''},{value:'L', color:''}],
                             [{value:'Z', color:''},{value:'X', color:''},{value:'C', color:''},{value:'V', color:''},{value:'space', color:''},{value:'B', color:''},{value:'N', color:''},{value:'M', color:''}]];
@@ -38,7 +30,7 @@ export function useWordle(){
     const pointerRef = useRef(null);
     
     const [currentBoard, setCurrentBoard] = useState(wordleState);
-    const [currentKeyBoard, setcurrentKeyBoard] = useState(keyboardLetters);
+    const [currentKeyBoard, setCurrentKeyBoard] = useState(keyboardLetters);
     const [currLetterPointer, setCurrLetterPointer] = useState({
     x: 0,
     y: 0,
@@ -96,19 +88,19 @@ export function useWordle(){
 
     }
 
-    function useModalHelp(show){
+    function useModalHelp(show:boolean){
 
         setmodalShowState(show);
 
     }
 
-    function useModalLogin(show:boolean){
+    function showModalLogin(show:boolean){
 
         setloginShowState(show);
 
     }
 
-    function useCurrentUser(name:string){
+    function enterCurrentUser(name:string){
 
         setCurrentUser(name); 
 
@@ -149,7 +141,7 @@ export function useWordle(){
 
     function keyBoardUpdate(){
 
-        const changedKeysLst = {}
+        const changedKeysLst:{[key: string]: string } = {};
 
         currentBoard.forEach((word) =>{
 
@@ -159,7 +151,9 @@ export function useWordle(){
 
                     if(Object.keys(changedKeysLst).includes(letter.char)){
                         
-                        switch(changedKeysLst[letter.char]){
+                        const currentColor = changedKeysLst[letter.char]
+                        
+                        switch(currentColor){
                             case 'green':
                                 break;
                             case 'yellow':
@@ -180,36 +174,35 @@ export function useWordle(){
             })
         });
 
-        const newKeyBoard = currentKeyBoard.map((line)=>{
+
+        const newKeyBoard:keyboardLetter[][] = currentKeyBoard.map((line)=>(
             line.map((key)=>{
-                if(Object.keys(changedKeysLst).includes(key.value)){
-                    key.color = changedKeysLst[key.value]
+                
+                let newKey:keyboardLetter = {...key};
+                
+                if(Object.keys(changedKeysLst).includes(key.value))
+                {
+                    newKey = {...key, color:changedKeysLst[key.value]}
                 }
-                return key;
-            })
-        });
+                return newKey;
+            }
+            
+            )
+            
+        ));
+        setCurrentKeyBoard(newKeyBoard);
         
     }
 
-    // const LetterEnter = (key:string) =>{
-    //     addLetterToBoard(key);
-    //     moveCurrLetterPointer();
-    //     // currLetterPointer.pRef.current.focus();
-    // }
-
-    const useLogin = (name:string) =>{
-        useCurrentUser(name);
-        useModalLogin(false);
+    const LetterEnter = (key:string) =>{
+        addLetterToBoard(key);
+        moveCurrLetterPointer();
+        
     }
 
-    // const setLetterPointerRef = (ref:React.RefObject<HTMLElement>) =>{
-    //     const newPointer = {...currLetterPointer, ref}
-        
-    //     setCurrLetterPointer(newPointer);
-    // }
-    const UpdatePointer = (Ref:React.RefObject<HTMLElement>) =>{
-        const newPointer = {...currLetterPointer, pRef:Ref}
-        setCurrLetterPointer(newPointer);
+    const enterLogin = (name:string) =>{
+        enterCurrentUser(name);
+        showModalLogin(false);
     }
 
 
@@ -228,18 +221,17 @@ export function useWordle(){
 
         currentKeyBoard, 
         
-        useModalLogin,
+        showModalLogin,
         loginShowState,
-        useCurrentUser,
+        enterCurrentUser,
         CurrentUser,
 
-        // currentColorBoard,
-        // colorBoardUpdate,
         BoardUpdate,
 
-        useLogin,
-        // LetterEnter,
-        UpdatePointer
+        enterLogin,
+        LetterEnter,
+        
+        keyBoardUpdate
     }
     );
 

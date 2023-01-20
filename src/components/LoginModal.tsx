@@ -1,18 +1,22 @@
-import React, { useContext, useRef } from "react";
-import { WordleContext } from "../context/WordleContext";
+import React, { useRef } from "react";
+
 import 'bootstrap/dist/css/bootstrap.css';
 import './Modal.scss';
 
 
-export function LoginModal(){
+interface helpModalProps{
+    enterLogin:(name:string)=>void
+}
+
+export function LoginModal(props:helpModalProps){
     
     
-    const {useModalLogin, useCurrentUser, useLogin} = useContext(WordleContext);
+    const { enterLogin} = props;
     
     const nameRef = useRef(null);
 
     const handleLogin = (event: React.MouseEvent<HTMLElement>) =>{
-        useLogin(nameRef.current.value);
+        enterLogin(nameRef.current.value);
     }
 
     const handleInputFocus = (event: React.SyntheticEvent) =>{
@@ -31,7 +35,7 @@ export function LoginModal(){
             <h4>Enter your name: </h4>
             <br/>
             <input type="text" ref={nameRef} onLoad={handleInputFocus}/>
-           <button type="button" className="btn btn-info submit" onClick={useLogin}>Login</button>
+           <button type="button" className="btn btn-info submit" onClick={handleLogin}>Login</button>
         </form> 
         </div>
         </div>

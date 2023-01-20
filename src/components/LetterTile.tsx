@@ -9,7 +9,7 @@ interface letterTileProps{
 
 export function LetterTile(props:letterTileProps) {
       
-      const { currLetterPointer, UpdatePointer } = useContext(WordleContext);
+      const { currLetterPointer } = useContext(WordleContext);
       const {letterObj} = props;
 
       const Tilekey = letterObj.x.toString() + ':' + letterObj.y.toString();

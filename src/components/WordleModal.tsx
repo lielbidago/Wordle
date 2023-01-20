@@ -3,10 +3,13 @@ import { WordleContext } from "../context/WordleContext";
 import 'bootstrap/dist/css/bootstrap.css';
 import './Modal.scss';
 
+interface helpModalProps{
+    useModalHelp:(show:boolean)=>void
+}
 
-export function HelpModal(){
+export function HelpModal(props:helpModalProps){
     
-    const {useModalHelp} = useContext(WordleContext);
+    const {useModalHelp} = props;
 
     const useModalExit = (event: React.MouseEvent<HTMLElement>) =>{
         useModalHelp(false);

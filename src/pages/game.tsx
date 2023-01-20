@@ -8,67 +8,23 @@ import { LoginModal } from "../components/LoginModal";
 import { useEffect, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 
-// grey = 'rgb(218 218 218 / 76%)'
-//green = 'rgb(18 226 198 / 76%)'
-//yellow = 'rgb(255 224 131 / 76%)'
-//
 export function GamePage(){
 
     const WordleAPI = useWordle();
     const {modalShowState, useModalHelp, addLetterToBoard,
-         moveCurrLetterPointer, currLetterPointer, loginShowState, useModalLogin,
-          CurrentUser, useCurrentUser, setmodalShowState,currentBoard,BoardUpdate, currentKeyBoard } = WordleAPI;
+        moveCurrLetterPointer,enterCurrentUser, currLetterPointer,
+        loginShowState,showModalLogin,enterLogin,CurrentUser,
+        setmodalShowState,currentBoard,BoardUpdate, keyBoardUpdate 
+    } = WordleAPI;
+
+    const gameRef = useRef(null);
 
     const useHelpClick = (event: React.MouseEvent<HTMLElement>) =>{
         useModalHelp(true);
     }
 
-    // const handleClick = (event: React.MouseEvent<HTMLElement>) =>{
-    //     useLetterEnter(props.keyValue);
-    // }
-
-    useEffect(()=>{
-        currLetterPointer.pRef.current.focus();
-    }, [currLetterPointer.pRef.current]);
-
-    useEffect(()=>{
-        if(currLetterPointer.x ===0 && currLetterPointer.y>0 ){
-            BoardUpdate();
-        }
-        
-    }, [currLetterPointer]);
-    
-
-
-    // useEffect(()=>{
-    //     currentColorBoard.forEach((line:string[], lineIndex)=>{
-    //         line.forEach((tile:string, tileIndex)=>{
-
-    //             const tilePlace = 't-'+(tileIndex).toString()+":"+(lineIndex).toString();
-    //             const tileElement = document.getElementById(tilePlace);
-    //             const colors = ['rgba(218, 218, 218, 0.76)',
-    //                             'rgba(18, 226, 198, 0.76)',
-    //                             'rgba(255, 224, 131, 0.76)']
-
-    //             tileElement.style.backgroundColor = tile.slice(2);
-        
-    //             if(colors.includes(tileElement.style.backgroundColor))
-    //             { tileElement.style.color = 'white'};
-                
-    //             if(tile !== '' ){
-                    
-    //                 const keyElement = document.getElementById('k-'+tile.slice(0,1));
-    //                 keyElement.style.backgroundColor = tile.slice(2);
-    //                 keyElement.style.color = 'white';
-    //                 keyElement.style.border = 'solid white 1px';
-    //             }
-
-    //         })
-    //     })
-    // }, [currentColorBoard])
-
     const useLoginClick = (event: React.MouseEvent<HTMLElement>) =>{
-        useModalLogin(true);
+        showModalLogin(true);
     }
 
     const useKeyboardEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -85,13 +41,36 @@ export function GamePage(){
 
     }
 
-    const gameRef = useRef(null);
-
     const useLogoutClick = () => {
-        
-        useCurrentUser('guest');
-        
+        enterCurrentUser('guest');
     }
+
+
+
+    useEffect(()=>{
+        currLetterPointer.pRef.current.focus();
+    }, [currLetterPointer.pRef.current]);
+
+
+    useEffect(()=>{
+        if(currLetterPointer.x ===0 && currLetterPointer.y>0 ){
+            BoardUpdate();
+        }
+        
+    }, [currLetterPointer]);
+
+    
+    useEffect(()=>{
+        if(currLetterPointer.x ===0 && currLetterPointer.y>0 ){
+            keyBoardUpdate();
+        }
+        
+    }, [currentBoard]);
+
+
+
+
+
 
     return (
         <WordleContext.Provider value = {WordleAPI}>
@@ -107,11 +86,11 @@ export function GamePage(){
                 </header>
                 <WordleScreen/>
                 <Keyboard/>
-                {modalShowState && <HelpModal/>}
+                {modalShowState && <HelpModal useModalHelp={useModalHelp}/>}
                 
             </div>
             
-            {loginShowState && <LoginModal/>}
+            {loginShowState && <LoginModal enterLogin={enterLogin}/>}
             
         </WordleContext.Provider>
 
