@@ -61,13 +61,13 @@ export function useWordle(){
     }
 
 
-    async function checkedWordArray(currentWord:string, currGameWord:string):Promise<string[]>{
+    async function checkedWordArray(guess:string, GameWord:string):Promise<string[]>{
         
         const response = await fetch(wordsURL+'/check-word',{
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'},
-            body:JSON.stringify({currentWord,currGameWord})});
+            body:JSON.stringify({guess,GameWord})});
         
         const statusArr = await response.json();
         
@@ -87,7 +87,7 @@ export function useWordle(){
         return wordStat;
     }
 
-    const currGameWord = getGameWord().toUpperCase();
+    const GameWord = getGameWord();
 
     
     
@@ -156,10 +156,10 @@ export function useWordle(){
         
         const prevWordIndex = currLetterPointer.y-1;
         
-        const currentWord = currentBoard[prevWordIndex]
+        const guess = currentBoard[prevWordIndex]
         .map((letterObj)=>letterObj.char).join('');
 
-        const wordStatus = await checkedWordArray(currGameWord,currentWord);
+        const wordStatus = await checkedWordArray(guess,GameWord);
         
         const newBoard:wordleLetter[][] = 
         currentBoard.map((line, index)=>{
