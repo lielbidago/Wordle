@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './Modal.scss';
@@ -19,9 +19,9 @@ export function LoginModal(props:helpModalProps){
         enterLogin(nameRef.current.value);
     }
 
-    const handleInputFocus = (event: React.SyntheticEvent) =>{
+    useEffect(()=>{
         nameRef.current.focus();
-    }
+    },[]);
 
 
     return(
@@ -34,7 +34,7 @@ export function LoginModal(props:helpModalProps){
         <form className="login-form">
             <h4>Enter your name: </h4>
             <br/>
-            <input type="text" ref={nameRef} onLoad={handleInputFocus}/>
+            <input type="text" ref={nameRef}/>
            <button type="button" className="btn btn-info submit" onClick={handleLogin}>Login</button>
         </form> 
         </div>

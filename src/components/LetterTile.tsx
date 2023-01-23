@@ -1,15 +1,16 @@
-import { WordleContext } from "../context/WordleContext";
-import { useContext, useRef } from "react";
+
+import {  useRef } from "react";
 import './LetterTile.scss';
 import { wordleLetter } from "../hooks/wordleHooks";
 
 interface letterTileProps{
       letterObj: wordleLetter,
+      currLetterPointer: {x:number, y:number, pRef:React.MutableRefObject<any>}
 }
 
 export function LetterTile(props:letterTileProps) {
       
-      const { currLetterPointer } = useContext(WordleContext);
+      const { currLetterPointer } = props;
       const {letterObj} = props;
 
       const Tilekey = letterObj.x.toString() + ':' + letterObj.y.toString();

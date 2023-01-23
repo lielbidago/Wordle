@@ -1,5 +1,5 @@
 import { useState,useRef } from "react";
-import { isWord, getWord,checkWord} from '../gameLogic/gameLogicFunctions'
+
 
 export interface wordleLetter{
     char: string,
@@ -42,9 +42,53 @@ export function useWordle(){
     const userName = localStorage.getItem('UserName');
     const user = userName? userName:'guest';
     const [CurrentUser, setCurrentUser] = useState(user);
+
+    const [gameWord, setgameWord] = useState('');
+    const wordsURL = 'http://localhost:3003/words';
     
 
-    const currGameWord = getWord().toUpperCase();
+    function getGameWord():string{
+        
+        if(gameWord === ''){
+            fetch(wordsURL+'/new-word')
+            .then(res => res.text()).then(w => setgameWord(w))
+            .catch(e => console.log(e));
+        }
+        
+        console.log(gameWord);
+        return gameWord;
+        
+    }
+
+
+    async function checkedWordArray(currentWord:string, currGameWord:string):Promise<string[]>{
+        
+        const response = await fetch(wordsURL+'/check-word',{
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'},
+            body:JSON.stringify({currentWord,currGameWord})});
+        
+        const statusArr = await response.json();
+        
+        return statusArr;
+    }
+
+    function isWord(statusArr:string[]){
+        
+        let wordStat = true;
+        
+        statusArr.forEach((s)=>{
+            if(s!=='green'){
+                wordStat = false;
+            }
+        });
+
+        return wordStat;
+    }
+
+    const currGameWord = getGameWord().toUpperCase();
+
     
     
     function addLetterToBoard(letterKey:string){
@@ -108,14 +152,14 @@ export function useWordle(){
     }
 
 
-    function BoardUpdate(){
+    async function BoardUpdate(){
         
         const prevWordIndex = currLetterPointer.y-1;
         
         const currentWord = currentBoard[prevWordIndex]
         .map((letterObj)=>letterObj.char).join('');
 
-        const wordStatus = checkWord(currGameWord,currentWord);
+        const wordStatus = await checkedWordArray(currGameWord,currentWord);
         
         const newBoard:wordleLetter[][] = 
         currentBoard.map((line, index)=>{
@@ -128,12 +172,11 @@ export function useWordle(){
         );
             
         setCurrentBoard(newBoard);
-
-        if(isWord(currentWord, currGameWord)){
+        if(isWord(wordStatus)){
             alert('success!!!');
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
+            // setTimeout(() => {
+            //     window.location.reload();
+            // }, 3000);
         }else{
             alert('fail:(');
         }

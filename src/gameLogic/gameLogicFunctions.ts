@@ -1,6 +1,5 @@
 
 export function getWord():string{
-    
     return 'lemon';
 }
 
