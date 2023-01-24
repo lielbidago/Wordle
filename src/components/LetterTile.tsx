@@ -10,8 +10,7 @@ interface letterTileProps{
 
 export function LetterTile(props:letterTileProps) {
       
-      const { currLetterPointer } = props;
-      const {letterObj} = props;
+      const { currLetterPointer,letterObj } = props;
 
       const Tilekey = letterObj.x.toString() + ':' + letterObj.y.toString();
       const isCurrentPointer = letterObj.x === currLetterPointer.x && letterObj.y === currLetterPointer.y;

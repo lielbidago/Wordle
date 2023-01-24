@@ -27,7 +27,7 @@ export function GamePage(){
     }
 
     const useKeyboardEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if ("qwertyuioplkjhgfdsazxcvbnm ".includes(event.key)){
+        if ("qwertyuioplkjhgfdsazxcvbnm ".includes(event.key) && !modalShowState){
             addLetterToBoard((event.key).toUpperCase());
             moveCurrLetterPointer();
             
@@ -47,12 +47,17 @@ export function GamePage(){
 
 
     useEffect(()=>{
-        currLetterPointer.pRef.current.focus();
+        if(currLetterPointer.pRef.current !== undefined){
+            currLetterPointer.pRef.current.focus();
+        }
+        
     }, [currLetterPointer.pRef.current]);
 
 
     useEffect(()=>{
         if(currLetterPointer.x ===0 && currLetterPointer.y>0 ){
+            BoardUpdate();
+        }else if (currLetterPointer.x ===4 && currLetterPointer.y ===4 && currentBoard[4][4].char !==''){
             BoardUpdate();
         }
         
@@ -65,10 +70,6 @@ export function GamePage(){
         }
         
     }, [currentBoard]);
-
-
-
-
 
 
     return (

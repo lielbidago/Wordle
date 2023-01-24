@@ -55,7 +55,7 @@ export function useWordle(){
             .catch(e => console.log(e));
         }
         
-        console.log(gameWord);
+        // console.log(gameWord);
         return gameWord;
         
     }
@@ -115,7 +115,9 @@ export function useWordle(){
 
         if(currLetterPointer.x===4 && currLetterPointer.y===4){
 
-            (()=>(alert('congrats!! you won!!')))();
+            // (()=>(alert('congrats!! you won!!')))();
+            newPointer.x = 4;
+            newPointer.y = 4;
 
         }else if (currLetterPointer.x===4){
             
@@ -128,6 +130,8 @@ export function useWordle(){
             newPointer.y = currLetterPointer.y;
         }
 
+        console.log('new pointer',newPointer);
+        
         setCurrLetterPointer(newPointer);
 
     }
@@ -152,12 +156,22 @@ export function useWordle(){
     }
 
 
-    async function BoardUpdate(){
+    async function BoardUpdate(){        
         
-        const prevWordIndex = currLetterPointer.y-1;
+        let prevWordIndex = null;
+        if(currLetterPointer.y===4 && currLetterPointer.x===4){
+            prevWordIndex = 4;
+        }else{
+            prevWordIndex = currLetterPointer.y-1;
+        }
+        // const prevWordIndex = currLetterPointer.y-1;
+        console.log(prevWordIndex);
+        
         
         const guess = currentBoard[prevWordIndex]
         .map((letterObj)=>letterObj.char).join('');
+
+        // alert(guess);
 
         const wordStatus = await checkedWordArray(guess,GameWord);
         
@@ -174,9 +188,6 @@ export function useWordle(){
         setCurrentBoard(newBoard);
         if(isWord(wordStatus)){
             alert('success!!!');
-            // setTimeout(() => {
-            //     window.location.reload();
-            // }, 3000);
         }else{
             alert('fail:(');
         }

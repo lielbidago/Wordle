@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-
 import 'bootstrap/dist/css/bootstrap.css';
 import './Modal.scss';
 
