@@ -27,7 +27,9 @@ export function GamePage(){
     }
 
     const useKeyboardEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if ("qwertyuioplkjhgfdsazxcvbnm ".includes(event.key) && !modalShowState){
+        
+        if(!modalShowState){
+            if ("qwertyuioplkjhgfdsazxcvbnm ".includes(event.key)){
             addLetterToBoard((event.key).toUpperCase());
             moveCurrLetterPointer();
             
@@ -37,6 +39,8 @@ export function GamePage(){
         else{
             (()=>alert('not a letter!'))();
         }
+        }
+        
 
     }
 
