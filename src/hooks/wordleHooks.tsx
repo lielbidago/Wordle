@@ -173,7 +173,7 @@ export function useWordle(){
 
 
         const wordStatus = await checkedWordArray(guess,GameWord);
-        
+
         const newBoard:wordleLetter[][] = 
         currentBoard.map((line, index)=>{
 
@@ -215,7 +215,7 @@ export function useWordle(){
                                 }
                                 break;
                             case 'grey':
-                                changedKeysLst[letter.char] = letter.char;
+                                changedKeysLst[letter.char] = letter.color;
                                 break;
                         }
 

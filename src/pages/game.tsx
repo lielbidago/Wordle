@@ -69,7 +69,7 @@ export function GamePage(){
 
     
     useEffect(()=>{
-        if(currLetterPointer.x ===0 && currLetterPointer.y>0 ){
+        if((currLetterPointer.x ===0 && currLetterPointer.y>0) || (currLetterPointer.x ===4 && currLetterPointer.y ===4)){
             keyBoardUpdate();
         }
         
