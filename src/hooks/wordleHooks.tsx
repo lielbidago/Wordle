@@ -55,7 +55,7 @@ export function useWordle(){
             .catch(e => console.log(e));
         }
         
-        // console.log(gameWord);
+
         return gameWord;
         
     }
@@ -130,7 +130,7 @@ export function useWordle(){
             newPointer.y = currLetterPointer.y;
         }
 
-        console.log('new pointer',newPointer);
+
         
         setCurrLetterPointer(newPointer);
 
@@ -164,14 +164,13 @@ export function useWordle(){
         }else{
             prevWordIndex = currLetterPointer.y-1;
         }
-        // const prevWordIndex = currLetterPointer.y-1;
-        console.log(prevWordIndex);
+
+
         
         
         const guess = currentBoard[prevWordIndex]
         .map((letterObj)=>letterObj.char).join('');
 
-        // alert(guess);
 
         const wordStatus = await checkedWordArray(guess,GameWord);
         

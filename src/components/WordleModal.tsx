@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { WordleContext } from "../context/WordleContext";
+
 import 'bootstrap/dist/css/bootstrap.css';
 import './Modal.scss';
 

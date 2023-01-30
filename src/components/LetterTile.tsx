@@ -3,12 +3,12 @@ import {  useRef } from "react";
 import './LetterTile.scss';
 import { wordleLetter } from "../hooks/wordleHooks";
 
-interface letterTileProps{
+export interface letterTileProps{
       letterObj: wordleLetter,
       currLetterPointer: {x:number, y:number, pRef:React.MutableRefObject<any>}
 }
 
-export function LetterTile(props:letterTileProps) {
+export default function LetterTile(props:letterTileProps) {
       
       const { currLetterPointer,letterObj } = props;
 

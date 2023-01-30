@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { WordleContext } from "../context/WordleContext";
 import { wordleLetter } from "../hooks/wordleHooks";
-import {LetterTile} from "./LetterTile";
+import LetterTile from "./LetterTile";
 import './WordleScreen.scss';
 
 export function WordleScreen(){
@@ -25,7 +25,6 @@ function Word(props:wordProps){
 
     const {wordLine, currLetterPointer} = props;
     
-
     return (
         <div className='word'>
             {wordLine.map((letterObj:wordleLetter)=><LetterTile letterObj={letterObj} key={letterObj.x+letterObj.y} currLetterPointer={currLetterPointer}/>)}
