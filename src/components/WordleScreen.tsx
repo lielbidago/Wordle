@@ -1,16 +1,21 @@
-import { useContext } from "react";
-import { WordleContext } from "../context/WordleContext";
+
 import { wordleLetter } from "../hooks/wordleHooks";
 import LetterTile from "./LetterTile";
 import './WordleScreen.scss';
 
-export function WordleScreen(){
+
+interface wordleScreenProps{
+    currentBoard:wordleLetter[][]
+    currLetterPointer:{x:number, y:number, pRef:React.MutableRefObject<any>}
+}
+export function WordleScreen(wordleScreenProps:wordleScreenProps){
     
-    const {currentBoard, currLetterPointer} = useContext(WordleContext);
+    const {currentBoard, currLetterPointer} = wordleScreenProps;
     
     return (
     <div className="screen">
-        {[0,1,2,3,4].map((lineIndex)=> <Word wordLine={currentBoard[lineIndex]} key={lineIndex} currLetterPointer={currLetterPointer}/>)}
+        {[0,1,2,3,4].map((lineIndex)=> <Word wordLine={currentBoard[lineIndex]} key={lineIndex}
+        lineIndex={lineIndex} currLetterPointer={currLetterPointer} />)}
     </div>
     
 );
@@ -18,15 +23,16 @@ export function WordleScreen(){
 
 interface wordProps {
      wordLine:wordleLetter[],
-    currLetterPointer: {x:number, y:number, pRef:React.MutableRefObject<any>}
+    currLetterPointer: {x:number, y:number, pRef:React.MutableRefObject<any>},
+    lineIndex:number
 };
 
 function Word(props:wordProps){
 
-    const {wordLine, currLetterPointer} = props;
+    const {wordLine, currLetterPointer,lineIndex} = props;
     
     return (
-        <div className='word'>
+        <div className={'word'+lineIndex}>
             {wordLine.map((letterObj:wordleLetter)=><LetterTile letterObj={letterObj} key={letterObj.x+letterObj.y} currLetterPointer={currLetterPointer}/>)}
         </div>
     );

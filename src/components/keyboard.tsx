@@ -1,14 +1,16 @@
 
 import Key from "./key";
-import { useContext } from "react";
-import { WordleContext } from "../context/WordleContext";
 import { keyboardLetter } from "../hooks/wordleHooks";
 
+interface keyboardProps{
+    LetterEnter:(key:string)=>void;
+    currentKeyBoard:keyboardLetter[][];
+}
 
-export function Keyboard(){
+export function Keyboard(keyboardProps:keyboardProps){
 
 
-    const {LetterEnter, currentKeyBoard} = useContext(WordleContext);
+    const {LetterEnter, currentKeyBoard} = keyboardProps;
     
     return (<div className="keyboard" >
 

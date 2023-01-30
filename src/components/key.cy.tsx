@@ -20,6 +20,14 @@ describe('Key component',()=>{
         cy.get('button').should('have.attr', 'class', 'key btn btn-outline-dark green');
         cy.get('button').should('have.text', 'H');
 
+    });
+
+    it('should raise key letter', ()=>{
+        const submit = cy.spy().as('enterLogin');
+
+        cy.mount(<Key key={'k-'+k1.value} letter={k1} LetterEnter={submit}/>);
+        cy.get('button').click();
+        cy.get('@enterLogin').should('have.been.calledWith', k1.value);
     })
 
     

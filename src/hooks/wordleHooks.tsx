@@ -114,8 +114,6 @@ export function useWordle(){
         const newPointer = {x:null, y:null, pRef:pointerRef};
 
         if(currLetterPointer.x===4 && currLetterPointer.y===4){
-
-            // (()=>(alert('congrats!! you won!!')))();
             newPointer.x = 4;
             newPointer.y = 4;
 
@@ -284,7 +282,9 @@ export function useWordle(){
         enterLogin,
         LetterEnter,
         
-        keyBoardUpdate
+        keyBoardUpdate,
+
+        keyboardLetters
     }
     );
 

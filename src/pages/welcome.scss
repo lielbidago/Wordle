@@ -16,8 +16,7 @@
     justify-content: center;
   
         .welcome-main{
-          // width: 50%;
-          // height: 60%;
+
           padding:5%;
   
           background-color: white;
@@ -38,7 +37,6 @@
 
   margin:10% 0% 10% 0%;
 
-  // transform: translateX(-50%) translateY(-50%);
 }
 .wordle-icon h1{
     font-size: 3.3em;
@@ -60,7 +58,6 @@
     animation-fill-mode: both;
 }
 
-// .wordle-icon { display: inline-block }
 
 .leRotateYZoomIn { animation-name: leRotateYZoomIn }
 @keyframes leRotateYZoomIn {

@@ -16,7 +16,8 @@ export default function Key(props:props){
     }
     
     return (
-        <button type="button" className={"key btn btn-outline-dark "+letter.color} id={'k-'+letter.value}
+        <button type="button" className={"key btn btn-outline-dark "+letter.color} 
+        id={'k-'+letter.value}
         onClick={handleClick}>{letter.value}</button>
     );
 

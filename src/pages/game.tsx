@@ -13,7 +13,8 @@ export function GamePage(){
     const {modalShowState, useModalHelp, addLetterToBoard,
         moveCurrLetterPointer,enterCurrentUser, currLetterPointer,
         loginShowState,showModalLogin,enterLogin,CurrentUser,
-        setmodalShowState,currentBoard,BoardUpdate, keyBoardUpdate 
+        setmodalShowState,currentBoard,BoardUpdate, keyBoardUpdate,
+        currentKeyBoard, LetterEnter
     } = WordleAPI;
 
     const gameRef = useRef(null);
@@ -88,8 +89,8 @@ export function GamePage(){
                     </div>
 
                 </header>
-                <WordleScreen/>
-                <Keyboard/>
+                <WordleScreen currentBoard={currentBoard} currLetterPointer={currLetterPointer}/>
+                <Keyboard LetterEnter={LetterEnter} currentKeyBoard={currentKeyBoard}/>
                 {modalShowState && <HelpModal useModalHelp={useModalHelp}/>}
                 
             </div>
