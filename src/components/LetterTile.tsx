@@ -27,7 +27,7 @@ export default function LetterTile(props:letterTileProps) {
       }
 
 
-      return <input className={"tile "+letterObj.color}
+      return <input className={"tile "+letterObj.color} readOnly
             value={letterObj.char}
             id={'t-' + Tilekey}
             ref={focusRef}

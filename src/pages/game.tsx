@@ -25,8 +25,8 @@ export function GamePage(){
         useModalHelp(true);
     }
 
-    const useLoginClick = (event: React.MouseEvent<HTMLElement>) =>{
-        showModalLogin(true);
+    const toggleLoginModal = () =>{
+        showModalLogin(!loginShowState);
     }
 
     const useKeyboardEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -88,7 +88,7 @@ export function GamePage(){
                         <p className="header-greeting">Hello, {CurrentUser}! </p>
                         <div className="buttons">
                             <button onClick={useHelpClick} type="button" className="btn btn-info">help</button>
-                            <button onClick={CurrentUser==='guest'? useLoginClick:useLogoutClick} 
+                            <button onClick={CurrentUser==='guest'? toggleLoginModal:useLogoutClick} 
                             type="button" className="btn btn-info">{CurrentUser==='guest'?'login':'logout'}</button>
                         </div>
                     </div>
@@ -100,7 +100,7 @@ export function GamePage(){
                 {statusModalShow && <StatusModal toggleStatusModalShow={toggleStatusModalShow} message={statusWord.current} />}
             </div>
             
-            {loginShowState && <LoginModal enterLogin={enterLogin}/>}
+            {loginShowState && <LoginModal enterLogin={enterLogin} toggleLoginModal={toggleLoginModal}/>}
             
         </WordleContext.Provider>
 
