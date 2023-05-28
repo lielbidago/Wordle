@@ -6,6 +6,7 @@ import {HelpModal} from "../components/WordleModal";
 import { LoginModal } from "../components/LoginModal";
 import { useEffect, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
+import { StatusModal } from "../components/StatusModal";
 
 export function GamePage(){
 
@@ -14,7 +15,8 @@ export function GamePage(){
         moveCurrLetterPointer,enterCurrentUser, currLetterPointer,
         loginShowState,showModalLogin,enterLogin,CurrentUser,
         setmodalShowState,currentBoard,BoardUpdate, keyBoardUpdate,
-        currentKeyBoard, LetterEnter
+        currentKeyBoard, LetterEnter,statusWord, toggleStatusModalShow,
+        statusModalShow,
     } = WordleAPI;
 
     const gameRef = useRef(null);
@@ -79,20 +81,23 @@ export function GamePage(){
 
     return (
         <WordleContext.Provider value = {WordleAPI}>
-            <div className={"game"} onKeyDown={useKeyboardEnter} ref={gameRef}>
+            <div className="game" onKeyDown={useKeyboardEnter} ref={gameRef}>
                 <header>
                     <span><h1>Wordle</h1><p>By Liel</p></span>
                     <div className="header-section">
                         <p className="header-greeting">Hello, {CurrentUser}! </p>
-                        <button onClick={useHelpClick} type="button" className="btn btn-info">help</button>
-                        <button onClick={CurrentUser==='guest'? useLoginClick:useLogoutClick} type="button" className="btn btn-info">{CurrentUser==='guest'?'login':'logout'}</button>
+                        <div className="buttons">
+                            <button onClick={useHelpClick} type="button" className="btn btn-info">help</button>
+                            <button onClick={CurrentUser==='guest'? useLoginClick:useLogoutClick} 
+                            type="button" className="btn btn-info">{CurrentUser==='guest'?'login':'logout'}</button>
+                        </div>
                     </div>
 
                 </header>
                 <WordleScreen currentBoard={currentBoard} currLetterPointer={currLetterPointer}/>
                 <Keyboard LetterEnter={LetterEnter} currentKeyBoard={currentKeyBoard}/>
                 {modalShowState && <HelpModal useModalHelp={useModalHelp}/>}
-                
+                {statusModalShow && <StatusModal toggleStatusModalShow={toggleStatusModalShow} message={statusWord.current} />}
             </div>
             
             {loginShowState && <LoginModal enterLogin={enterLogin}/>}

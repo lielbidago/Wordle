@@ -1,6 +1,7 @@
 import { useState,useRef } from "react";
 
 
+
 export interface wordleLetter{
     char: string,
     color:string,
@@ -38,13 +39,16 @@ export function useWordle(){
 
     const [modalShowState, setmodalShowState] = useState(false);
     const [loginShowState, setloginShowState] = useState(false);
+    const [statusModalShow, setStatusModalShow] = useState(false);
+    const toggleStatusModalShow = () => setStatusModalShow(!statusModalShow);
+    const statusWord = useRef('');
 
     const userName = localStorage.getItem('UserName');
     const user = userName? userName:'guest';
     const [CurrentUser, setCurrentUser] = useState(user);
 
     const [gameWord, setgameWord] = useState('');
-    const wordsURL = 'http://localhost:3003/words';
+    const wordsURL = 'https://wordle-server-6th2.onrender.com/words';
     
 
     function getGameWord():string{
@@ -59,6 +63,8 @@ export function useWordle(){
         return gameWord;
         
     }
+
+
 
 
     async function checkedWordArray(guess:string, GameWord:string):Promise<string[]>{
@@ -162,8 +168,6 @@ export function useWordle(){
         }else{
             prevWordIndex = currLetterPointer.y-1;
         }
-
-
         
         
         const guess = currentBoard[prevWordIndex]
@@ -183,11 +187,15 @@ export function useWordle(){
         );
             
         setCurrentBoard(newBoard);
+
         if(isWord(wordStatus)){
-            alert('success!!!');
+            statusWord.current = `you got it!!`
         }else{
-            alert('fail:(');
+            statusWord.current = `wrong :(
+                try again! (you have ${5-(currLetterPointer.y)} tries left)`;
         }
+
+        toggleStatusModalShow()
     }
 
     function keyBoardUpdate(){
@@ -283,7 +291,9 @@ export function useWordle(){
         LetterEnter,
         
         keyBoardUpdate,
-
+        statusWord,
+        statusModalShow,
+        toggleStatusModalShow,
         keyboardLetters
     }
     );

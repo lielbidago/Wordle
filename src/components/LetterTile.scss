@@ -1,15 +1,13 @@
 .tile{
-    min-width: 45px;
-    min-height: 45px;
-  
-    width:3.5vw;
-    height:7vh;
-  
-    font-size: 20px;
-    text-align: center;
-    margin: 2px;
-    border:solid #ffffff 0px;
-    border-radius: 5%;
+  min-width: 45px;
+  aspect-ratio: 1/1;
+  width:4%;
+
+  font-size: 20px;
+  text-align: center;
+  margin: 2px;
+  border:solid #ffffff 0px;
+  border-radius: 5%;
   
     
   }
