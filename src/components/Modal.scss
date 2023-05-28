@@ -39,11 +39,21 @@
 }
 
 .mini{
-  height: 20%;
+  height: 30%;
   width: 20%;
   aspect-ratio: 2/1;
   top:15%;
   left:40%;
+  
+  h1{
+    font-size: 1.8em;
+  }
+  h4{
+    font-size: 1.3em;
+  }
+  p{
+    font-size: 1em;
+  }
 }
   
 .model-example-style{
